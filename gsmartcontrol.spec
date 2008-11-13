@@ -1,14 +1,15 @@
 Name:		gsmartcontrol
 Version:	0.8.1
 Release:	%mkrel 1
-License:	GPLv2+
+License:	GPLv2, GPLv3
 Url:		http://gsmartcontrol.berlios.de
 Group:		System/Kernel and hardware
 Source:		gsmartcontrol-%{version}.tar.bz2
+SOURCE1:	gsmartcontrol_root.sh.in
 BuildRoot:	%{_tmppath}/%{name}-%{version}-build
 Summary:	GSmartControl - Hard Disk Health Inspection Tool
-Patch0:		gsmartcontrol-script.patch
-Patch1:		gsmartcontrol-menu.patch
+Patch0:		gsmartcontrol-menu.patch
+#Suggests:	libgnomesu, gksu, kdebase-progs
 
 # Dependencies for various distributions. The actual deps are:
 # smartmontools, pcre, (gtkmm2 >= 2.12 || (gtkmm2 >= 2.6.0 && libglademm >= 2.4.0))
@@ -16,7 +17,7 @@ Patch1:		gsmartcontrol-menu.patch
 # For non-specified distributions we don't specify any dependencies to avoid errors.
 
 
-Requires: smartmontools, libpcre0, libgtkmm2.4_1 >= 2.12.0
+Requires: smartmontools, libpcre0, gtkmm2.4 >= 2.12.0
 BuildRequires: gcc-c++, gcc-cpp, pcre-devel, gtkmm2.4-devel >= 2.12.0
 
 
@@ -29,12 +30,10 @@ SMART data to determine its health, as well as run various tests on it.
 %prep
 
 %setup -q
+cp %SOURCE1 data/
 %patch0 -p0
-%patch1 -p0
-%configure
-# Don't use configure parameters - let rpm set them.
-# --prefix=/usr --enable-default-gcc-options --enable-gcc-optimize
 
+%configure
 
 %build
 %make
