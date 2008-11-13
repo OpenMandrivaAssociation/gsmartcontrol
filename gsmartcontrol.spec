@@ -18,7 +18,7 @@ Patch0:		gsmartcontrol-menu.patch
 
 
 Requires: smartmontools, libpcre0, gtkmm2.4 >= 2.12.0
-BuildRequires: gcc-c++, gcc-cpp, pcre-devel, gtkmm2.4-devel >= 2.12.0
+BuildRequires: gcc-c++, gcc-cpp, pcre-devel, gtkmm2.4-devel >= 2.12.0, desktop-file-utils
 
 
 %description
