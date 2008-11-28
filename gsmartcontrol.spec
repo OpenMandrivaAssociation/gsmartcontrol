@@ -1,6 +1,6 @@
 Name:		gsmartcontrol
 Version:	0.8.1
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2, GPLv3
 Url:		http://gsmartcontrol.berlios.de
 Group:		System/Kernel and hardware
@@ -17,7 +17,7 @@ Patch0:		gsmartcontrol-menu.patch
 # For non-specified distributions we don't specify any dependencies to avoid errors.
 
 
-Requires: smartmontools, libpcre0, gtkmm2.4 >= 2.12.0
+Requires: smartmontools, gtkmm2.4 >= 2.12.0
 BuildRequires: gcc-c++, gcc-cpp, pcre-devel, gtkmm2.4-devel >= 2.12.0, desktop-file-utils
 
 
