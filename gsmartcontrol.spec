@@ -9,7 +9,7 @@ SOURCE1:	gsmartcontrol_root.sh.in
 BuildRoot:	%{_tmppath}/%{name}-%{version}-build
 Summary:	GSmartControl - Hard Disk Health Inspection Tool
 Requires: smartmontools, gtkmm2.4 >= 2.12.0
-BuildRequires: pcre-devel, gtkmm2.4-devel >= 2.12.0, desktop-file-utils
+BuildRequires: pcre-devel, gtkmm2.4-devel >= 2.12.0
 
 
 %description
