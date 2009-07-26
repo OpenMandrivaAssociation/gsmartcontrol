@@ -1,6 +1,6 @@
 Name:		gsmartcontrol
 Version:	0.8.4
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2, GPLv3
 Url:		http://gsmartcontrol.berlios.de
 Group:		System/Kernel and hardware
@@ -21,6 +21,7 @@ SMART data to determine its health, as well as run various tests on it.
 %prep
 %setup -q
 %patch0 -p1 -b .gcc4.4
+sed -i -e "s/Exec=.*gsmartcontrol-root\"/Exec=gsmartcontrol/" data/gsmartcontrol.desktop.in
 
 %build
 %configure2_5x
@@ -30,6 +31,10 @@ SMART data to determine its health, as well as run various tests on it.
 rm -fr %buildroot
 %makeinstall_std
 
+mkdir %{buildroot}/%{_sbindir}
+mv %{buildroot}/%{_bindir}/gsmartcontrol %{buildroot}/%{_sbindir}/gsmartcontrol
+ln -s %{_bindir}/consolehelper %{buildroot}/%{_bindir}/gsmartcontrol
+
 %clean
 rm -rf %buildroot
 
@@ -37,6 +42,7 @@ rm -rf %buildroot
 %doc %{_datadir}/doc/gsmartcontrol
 %defattr(-,root,root)
 %attr(0755,root,root) %{_bindir}/*
+%attr(0755,root,root) %{_sbindir}/gsmartcontrol
 %{_datadir}/gsmartcontrol
 %{_datadir}/applications/*.desktop
 %{_datadir}/icons/*
