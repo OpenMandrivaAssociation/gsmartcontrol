@@ -1,14 +1,17 @@
 Name:		gsmartcontrol
-Version:	0.8.5
-Release:	%mkrel 2
+Version:	0.8.6
+Release:	%mkrel 1
 License:	GPLv2, GPLv3
 Url:		http://gsmartcontrol.berlios.de
 Group:		System/Kernel and hardware
 Source:		http://download.berlios.de/%{name}/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-build
 Summary:	GSmartControl - Hard Disk Health Inspection Tool
-Requires: smartmontools, gtkmm2.4 >= 2.12.0
-BuildRequires: pcre-devel, gtkmm2.4-devel >= 2.12.0
+Requires:	gtkmm2.4 >= 2.12.0
+Requires:	smartmontools
+Requires:	usermode-consoleonly
+BuildRequires:	pcre-devel
+BuildRequires:	gtkmm2.4-devel >= 2.12.0
 
 
 %description
