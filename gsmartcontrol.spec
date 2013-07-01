@@ -6,7 +6,7 @@ Url:		http://gsmartcontrol.berlios.de
 Group:		System/Kernel and hardware
 Source0:		http://download.berlios.de/%{name}/%{name}-%{version}.tar.bz2
 source1:		.abf.yml
-Summary:	GSmartControl - Hard Disk Health Inspection Tool
+Summary:	- Hard Disk Health Inspection Tool
 Requires:	gtkmm2.4 >= 2.12.0
 Requires:	smartmontools
 Requires:	usermode-consoleonly
