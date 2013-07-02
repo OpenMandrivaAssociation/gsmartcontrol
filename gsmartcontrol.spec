@@ -1,12 +1,11 @@
 Name:		gsmartcontrol
 Version:	0.8.7
-Release:	1
+Release:	2
 License:	GPLv2, GPLv3
 Url:		http://gsmartcontrol.berlios.de
 Group:		System/Kernel and hardware
-Source0:		http://download.berlios.de/%{name}/%{name}-%{version}.tar.bz2
-source1:		.abf.yml
-Summary:	- Hard Disk Health Inspection Tool
+Source0:	http://download.berlios.de/%{name}/%{name}-%{version}.tar.bz2
+Summary:	Hard Disk Health Inspection Tool
 Requires:	gtkmm2.4 >= 2.12.0
 Requires:	smartmontools
 Requires:	usermode-consoleonly
@@ -37,7 +36,6 @@ ln -s %{_bindir}/consolehelper %{buildroot}%{_bindir}/%{name}
 
 %files
 %doc %{_datadir}/doc/%{name}
-%defattr(-,root,root)
 %attr(0755,root,root) %{_bindir}/*
 %attr(0755,root,root) %{_sbindir}/%{name}
 %{_datadir}/%{name}
