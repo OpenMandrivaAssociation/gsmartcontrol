@@ -1,6 +1,6 @@
 Name:		gsmartcontrol
 Version:	0.8.7
-Release:	2
+Release:	3
 License:	GPLv2, GPLv3
 Url:		http://gsmartcontrol.berlios.de
 Group:		System/Kernel and hardware
