@@ -1,14 +1,15 @@
 Name:		gsmartcontrol
 Version:	0.8.7
-Release:	3
+Release:	4
 License:	GPLv2, GPLv3
 Url:		http://gsmartcontrol.berlios.de
 Group:		System/Kernel and hardware
 Source0:	http://download.berlios.de/%{name}/%{name}-%{version}.tar.bz2
+Source1:	net.sourceforge.%{name}.policy
+Patch0:		gsmartcontrol_parser_crash_fix.diff
 Summary:	Hard Disk Health Inspection Tool
 Requires:	gtkmm2.4 >= 2.12.0
 Requires:	smartmontools
-Requires:	usermode-consoleonly
 BuildRequires:	pkgconfig(libpcre)
 BuildRequires:	pkgconfig(gtkmm-2.4) >= 2.12.0
 
@@ -21,27 +22,36 @@ SMART data to determine its health, as well as run various tests on it.
 
 %prep
 %setup -q
+%apply_patches
 sed -i -e "s/Exec=.*gsmartcontrol-root\"/Exec=gsmartcontrol/" data/gsmartcontrol.desktop.in
 
 %build
+export CXX='%__cxx -std=c++11'
 %configure2_5x
 %make
 
 %install
 %makeinstall_std
 
-mkdir %{buildroot}%{_sbindir}
-mv %{buildroot}%{_bindir}/%{name} %{buildroot}%{_sbindir}/%{name}
-ln -s %{_bindir}/consolehelper %{buildroot}%{_bindir}/%{name}
+%__mkdir_p %{buildroot}%{_libexecdir}
+mv %{buildroot}/%{_bindir}/%{name} %{buildroot}%{_libexecdir}/%{name}
+
+# Policy Kit support for nice root access
+cat >%{buildroot}%{_bindir}/%{name} <<EOF
+#!/bin/sh
+exec %{_bindir}/pkexec %{_libexecdir}/%{name} \$*
+EOF
+%__install -m 0644 %{SOURCE1} -D %{buildroot}%{_datadir}/polkit-1/actions/net.sourceforge.%{name}.policy
 
 %files
 %doc %{_datadir}/doc/%{name}
 %attr(0755,root,root) %{_bindir}/*
-%attr(0755,root,root) %{_sbindir}/%{name}
+%{_libexecdir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/*
 %{_datadir}/pixmaps/*
+%{_datadir}/polkit-1/actions/*.policy
 %{_mandir}/man1/%{name}-root.1*
 %{_mandir}/man1/%{name}.1*
 
