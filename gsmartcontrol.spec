@@ -6,7 +6,6 @@ Url:		http://gsmartcontrol.berlios.de
 Group:		System/Kernel and hardware
 Source0:	http://download.berlios.de/%{name}/%{name}-%{version}.tar.bz2
 Source1:	net.sourceforge.%{name}.policy
-Patch0:		gsmartcontrol_parser_crash_fix.diff
 Summary:	Hard Disk Health Inspection Tool
 Requires:	gtkmm3.0
 Requires:	smartmontools
