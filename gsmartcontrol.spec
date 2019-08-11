@@ -1,6 +1,6 @@
 Name:		gsmartcontrol
-Version:	0.8.7
-Release:	4
+Version:	1.1.3
+Release:	1
 License:	GPLv2, GPLv3
 Url:		http://gsmartcontrol.berlios.de
 Group:		System/Kernel and hardware
@@ -8,10 +8,13 @@ Source0:	http://download.berlios.de/%{name}/%{name}-%{version}.tar.bz2
 Source1:	net.sourceforge.%{name}.policy
 Patch0:		gsmartcontrol_parser_crash_fix.diff
 Summary:	Hard Disk Health Inspection Tool
-Requires:	gtkmm2.4 >= 2.12.0
+Requires:	gtkmm3.0
 Requires:	smartmontools
+Requires:	polkit
+
+BuildRequires:	pkgconfig(gtkmm-3.0)
 BuildRequires:	pkgconfig(libpcre)
-BuildRequires:	pkgconfig(gtkmm-2.4) >= 2.12.0
+BuildRequires:	pkgconfig(libpcrecpp)
 
 
 %description
@@ -21,39 +24,29 @@ Technology) data in hard disk drives. It allows you to inspect the drive's
 SMART data to determine its health, as well as run various tests on it.
 
 %prep
-%setup -q
-%apply_patches
-sed -i -e "s/Exec=.*gsmartcontrol-root\"/Exec=gsmartcontrol/" data/gsmartcontrol.desktop.in
+%autosetup -p1
 
 %build
-export CXX='%__cxx -std=c++11'
-%configure2_5x
-%make
+CXXFLAGS="%{optflags} -std=gnu++11" \
+%configure
+%make_build
 
 %install
-%makeinstall_std
-
-%__mkdir_p %{buildroot}%{_libexecdir}
-mv %{buildroot}/%{_bindir}/%{name} %{buildroot}%{_libexecdir}/%{name}
-
-# Policy Kit support for nice root access
-cat >%{buildroot}%{_bindir}/%{name} <<EOF
-#!/bin/sh
-exec %{_bindir}/pkexec %{_libexecdir}/%{name} \$*
-EOF
-%__install -m 0644 %{SOURCE1} -D %{buildroot}%{_datadir}/polkit-1/actions/net.sourceforge.%{name}.policy
+%make_install
 
 %files
 %doc %{_datadir}/doc/%{name}
 %attr(0755,root,root) %{_bindir}/*
-%{_libexecdir}/%{name}
+%{_sbindir}/%{name}
 %{_datadir}/%{name}
-%{_datadir}/applications/%{name}.desktop
+%{_datadir}/applications/*.desktop
+%{_datadir}/metainfo/*.xml
 %{_datadir}/icons/*
 %{_datadir}/pixmaps/*
 %{_datadir}/polkit-1/actions/*.policy
 %{_mandir}/man1/%{name}-root.1*
-%{_mandir}/man1/%{name}.1*
+%{_mandir}/man1/gsmartcontrol.1*
+
 
 
 %changelog
