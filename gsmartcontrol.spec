@@ -1,10 +1,11 @@
 Name:		gsmartcontrol
-Version:	1.1.3
+Version:	1.1.4
 Release:	1
 License:	GPLv2, GPLv3
 Url:		http://gsmartcontrol.berlios.de
 Group:		System/Kernel and hardware
-Source0:	http://download.berlios.de/%{name}/%{name}-%{version}.tar.bz2
+Source0:	https://github.com/ashaduri/gsmartcontrol/releases/download/v%{version}/gsmartcontrol-%{version}.tar.bz2
+#Source0:	http://download.berlios.de/%{name}/%{name}-%{version}.tar.bz2
 Source1:	net.sourceforge.%{name}.policy
 Summary:	Hard Disk Health Inspection Tool
 Requires:	gtkmm3.0
