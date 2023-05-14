@@ -37,7 +37,6 @@ CXXFLAGS="%{optflags} -std=gnu++11" \
 %files
 %doc %{_datadir}/doc/%{name}
 %attr(0755,root,root) %{_bindir}/*
-%{_sbindir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/applications/*.desktop
 %{_datadir}/metainfo/*.xml
