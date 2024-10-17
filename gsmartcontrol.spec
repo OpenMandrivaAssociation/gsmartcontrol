@@ -2,7 +2,7 @@ Name:		gsmartcontrol
 Version:	1.1.4
 Release:	1
 License:	GPLv2, GPLv3
-Url:		http://gsmartcontrol.berlios.de
+Url:		https://gsmartcontrol.berlios.de
 Group:		System/Kernel and hardware
 Source0:	https://github.com/ashaduri/gsmartcontrol/releases/download/v%{version}/gsmartcontrol-%{version}.tar.bz2
 #Source0:	http://download.berlios.de/%{name}/%{name}-%{version}.tar.bz2
