@@ -1,10 +1,10 @@
 Name:		gsmartcontrol
-Version:	1.1.4
+Version:	2.0.0
 Release:	1
-License:	GPLv2, GPLv3
+License:	GPLv3
 Url:		https://gsmartcontrol.berlios.de
 Group:		System/Kernel and hardware
-Source0:	https://github.com/ashaduri/gsmartcontrol/releases/download/v%{version}/gsmartcontrol-%{version}.tar.bz2
+Source0:	https://github.com/ashaduri/gsmartcontrol/archive/v%{version}/gsmartcontrol-%{version}.tar.gz
 #Source0:	http://download.berlios.de/%{name}/%{name}-%{version}.tar.bz2
 Source1:	net.sourceforge.%{name}.policy
 Summary:	Hard Disk Health Inspection Tool
@@ -12,6 +12,7 @@ Requires:	gtkmm3.0
 Requires:	smartmontools
 Requires:	polkit
 
+BuildRequires:	cmake
 BuildRequires:	pkgconfig(gtkmm-3.0)
 BuildRequires:	pkgconfig(libpcre)
 BuildRequires:	pkgconfig(libpcrecpp)
@@ -27,12 +28,11 @@ SMART data to determine its health, as well as run various tests on it.
 %autosetup -p1
 
 %build
-CXXFLAGS="%{optflags} -std=gnu++11" \
-%configure
+%cmake
 %make_build
 
 %install
-%make_install
+%make_install -C build
 
 %files
 %doc %{_datadir}/doc/%{name}
@@ -41,11 +41,9 @@ CXXFLAGS="%{optflags} -std=gnu++11" \
 %{_datadir}/applications/*.desktop
 %{_datadir}/metainfo/*.xml
 %{_datadir}/icons/*
-%{_datadir}/pixmaps/*
 %{_datadir}/polkit-1/actions/*.policy
 %{_mandir}/man1/%{name}-root.1*
 %{_mandir}/man1/gsmartcontrol.1*
-
 
 
 %changelog
