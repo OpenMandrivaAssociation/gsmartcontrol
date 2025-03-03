@@ -1,5 +1,5 @@
 Name:		gsmartcontrol
-Version:	2.0.1
+Version:	2.0.2
 Release:	1
 License:	GPLv3
 Url:		https://gsmartcontrol.berlios.de
